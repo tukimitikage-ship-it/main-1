@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="JA">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お絵描き</title>
+    <link rel="stylesheet" href="oekakistyle.css">
+</head>
+
+<body>
+    <canvas class="paper">
+    </canvas>
+    <div class="box"></div>
+    <button class="clean">全部消す</button>
+    <input type="color" class="color">
+    <div class="thicknessBox">
+        <input type="range" min="1" max="30" value="3" class="thickness">
+        <span class=thicknessNumber>3</span>
+    </div>
+    <button class="eraser">消しゴム</button>
+    <button class="pen">ペン</button>
+    <div class="circle"></div>
+    <script src="oekakiengine.js"></script>
+</body>
+
+</html>

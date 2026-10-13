@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+}
+
+.box {
+    position: fixed;
+    display: none;
+    background-color: #f0f0f0;
+    color: black;
+    padding: 3px 6px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+canvas {
+    display: block;
+}
+
+.clean {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.color {
+    position: fixed;
+    top: 10px;
+    left: 125px;
+    width: 45px;
+    height: 45px;
+}
+
+.thicknessBox {
+    position: fixed;
+    top: 35px;
+    left: 190px;
+}
+
+.thickness {
+    margin: 0;
+    width: 150px;
+}
+
+.thicknessNumber {
+    transform: translateX(-50%);
+    position: absolute;
+    top: -24px;
+    padding: 2px 6px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.eraser {
+    position: fixed;
+    top: 10px;
+    left: 360px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.pen {
+    position: fixed;
+    top: 10px;
+    left: 475px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.circle {
+    position: fixed;
+    border-radius: 50%;
+    border: 1.5px solid rgb(0, 0, 0);
+    box-sizing: border-box;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}

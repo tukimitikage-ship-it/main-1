@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天気予報</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="weather_app">
+        <h1>
+            天気予報
+        </h1>
+        <div class="search_box">
+            <select class="city_input">
+                <option disabled selected>---都市を選択---</option>
+                <option value="Tokyo,jp">東京都 (Tokyo)</option>
+                <option value="Osaka,jp">大阪市 (Osaka)</option>
+                <option value="Kyoto,jp">京都市 (Kyoto)</option>
+                <option value="Yokohama,jp">横浜市 (Yokohama)</option>
+                <option value="Nagoya,jp">名古屋市 (Nagoya)</option>
+                <option value="Sapporo,jp">札幌市 (Sapporo)</option>
+                <option value="Fukuoka,jp">福岡市 (Fukuoka)</option>
+                <option value="Kobe,jp">神戸市 (Kobe)</option>
+                <option value="Sendai,jp">仙台市 (Sendai)</option>
+                <option value="Hiroshima,jp">広島市 (Hiroshima)</option>
+                <option value="Saitama,jp">さいたま市 (Saitama)</option>
+                <option value="Chiba,jp">千葉市 (Chiba)</option>
+                <option value="Niigata,jp">新潟市 (Niigata)</option>
+                <option value="Kanazawa,jp">金沢市 (Kanazawa)</option>
+                <option value="Shizuoka,jp">静岡市 (Shizuoka)</option>
+                <option value="Okayama,jp">岡山市 (Okayama)</option>
+                <option value="Matsuyama,jp">松山市 (Matsuyama)</option>
+                <option value="Kitakyushu,jp">北九州市 (Kitakyushu)</option>
+                <option value="Kumamoto,jp">熊本市 (Kumamoto)</option>
+                <option value="Kagoshima,jp">鹿児島市 (Kagoshima)</option>
+                <option value="Naha,jp">那覇市 (Naha)</option>
+            </select>
+            <!-- <input type="text" class="city_input" placeholder="都市名を入力"> -->
+            <!-- <button class="search_button">検索</button> -->
+        </div>
+        <div class="weather_info">
+            <h2 class="city_name">--</h2>
+            <p class="temperature">--</p>
+            <p class="weather_condition">--</p>
+            <p class="advice">都市名を選択して検索できます</p>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
