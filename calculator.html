@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算機</title>
+</head>
+
+<body>
+    <input type="number" id="number1" value="1">
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">×</option>
+        <option value="/">÷</option>
+    </select>
+    <input type="number" id="number2" value="1">
+    =
+    <span id="answer"></span>
+    <script>
+        a()
+        document.querySelector('body').addEventListener("input", a);
+        function a() {
+            if (document.querySelector('select').value == '-') {
+                document.querySelector('#answer').innerText = document.querySelector('#number1').value - document.querySelector('#number2').value
+            }
+            if (document.querySelector('select').value == '+') {
+                document.querySelector('#answer').innerText = Number(document.querySelector('#number1').value) + Number(document.querySelector('#number2').value)
+            }
+            if (document.querySelector('select').value == '*') {
+                document.querySelector('#answer').innerText = document.querySelector('#number1').value * document.querySelector('#number2').value
+            }
+            if (document.querySelector('select').value == '/') {
+                document.querySelector('#answer').innerText = document.querySelector('#number1').value / document.querySelector('#number2').value
+            }
+
+        }
+    </script>
+</body>
+
+</html>
