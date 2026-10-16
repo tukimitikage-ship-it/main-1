@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>input</title>
+
+</head>
+
+<body>
+    <input type="text">
+    <p style="white-space: pre;"></p>
+    <script>
+        document.querySelector('input').addEventListener("input", a);
+        function a() {
+            document.querySelector('p').innerText = document.querySelector('input').value
+        }
+
+    </script>
+</body>
+
+</html>

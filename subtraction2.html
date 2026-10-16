@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>引き算</title>
+</head>
+
+<body>
+    <p>
+        <input type="number" id="number1" value="72895"> - <input type="number" id="number2" value="6925"> = <span
+            id="answer"></span>
+    </p>
+    <script>
+        a()
+        document.querySelector('p').addEventListener("input", a);
+
+
+        function a() {
+            if (document.querySelector('select').value == '-') {
+                document.querySelector('#answer').innerText = document.querySelector('#number1').value - document.querySelector('#number2').value
+            }
+             if (document.querySelector('select').value == '+') {
+                document.querySelector('#answer').innerText = document.querySelector('#number1').value + document.querySelector('#number2').value
+            }
+             if (document.querySelector('select').value == '*') {
+                document.querySelector('#answer').innerText = document.querySelector('#number1').value * document.querySelector('#number2').value
+            }
+             if (document.querySelector('select').value == '/') {
+                document.querySelector('#answer').innerText = document.querySelector('#number1').value / document.querySelector('#number2').value
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

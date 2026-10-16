@@ -1,0 +1,16 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+canvas {outline: solid 12px black ; 
+    border-radius: 6px;
+    background-color: rgb(5, 135, 10);
+}
