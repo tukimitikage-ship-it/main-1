@@ -45,13 +45,14 @@ body {
 }
 
 .home button:hover {
-    background: var(--panel);
+    background: var(--accent);
     color: var(--bg);
 }
 
 canvas {
-    width: min(90vw, 960px);
+    width: min(90vw, calc(90vh*1.5), 960px);
     aspect-ratio: 3 / 2;
+     box-shadow: 0 0 0 2px var(--accent), 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .hidden {
