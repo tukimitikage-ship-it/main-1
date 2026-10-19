@@ -62,9 +62,8 @@ const update = () => {
     ball.speedy *= -1;
     ball.y = radius;
   }
-  if (keys.ArrowLeft || keys.KeyA) {
-    paddle.x -= paddle.speed;
-  }
+  if (keys.ArrowLeft || keys.KeyA) paddle.x -= paddle.speed;
+
   if (keys.ArrowRight || keys.KeyD) paddle.x += paddle.speed;
   paddle.x = Math.max(0, Math.min(paddle.x, gamepanel.width - paddle.width));
 };
