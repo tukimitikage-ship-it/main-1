@@ -3,17 +3,12 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "noEmit": true,
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": [
-    "*.ts"
-  ]
+  "include": ["*.ts"]
 }
