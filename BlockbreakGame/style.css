@@ -41,7 +41,7 @@ body {
     border: 2px solid var(--accent);
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.15s, color 0.15s;
+    transition: background ease 0.15s, color 0.15s;
 }
 
 .home button:hover {
