@@ -54,7 +54,7 @@ const level: number[][] = [
 ];
 let levelIndex = 0;
 const blocks: Block[] = [];
-const createBricks = () => {
+const createBlocks = () => {
   blocks.length = 0;
   for (const [row, cells] of level.entries()) {
     for (const [col, cell] of cells.entries()) {
@@ -121,7 +121,12 @@ const draw = () => {
   for (const b of blocks) {
     ctx.fillStyle = b.type === "hard" ? "#f59e0b" : "#38bdf8";
     ctx.fillRect(b.x, b.y, b.width, b.height);
-    const borderGradient = ctx.createLinearGradient(b.x, b.y, b.x + b.width, b.y + b.height);
+    const borderGradient = ctx.createLinearGradient(
+      b.x,
+      b.y,
+      b.x + b.width,
+      b.y + b.height,
+    );
     if (b.type === "hard") {
       borderGradient.addColorStop(0, "#fff7ad");
       borderGradient.addColorStop(0.5, "#fb923c");
@@ -251,6 +256,6 @@ startButton.addEventListener("click", () => {
   gamePanel.classList.remove("hidden");
   home.classList.add("hidden");
   game = true;
-  createBricks();
+  createBlocks();
   loop();
 });
