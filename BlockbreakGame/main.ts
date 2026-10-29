@@ -246,6 +246,9 @@ const update = () => {
     }
     break;
   }
+  if (blocks.length === 0) {
+  createBlocks();
+}
 };
 const loop = () => {
   update();

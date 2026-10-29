@@ -63,6 +63,7 @@ canvas {
     width: min(90vw, calc(90vh*1.5), 960px);
     aspect-ratio: 3 / 2;
     border: 2px solid transparent;
+    border-bottom-color: red;
     background:
         linear-gradient(var(--bg), var(--bg)) padding-box,
         linear-gradient(135deg, #e0f2fe, #38bdf8 50%, #1d4ed8) border-box;
