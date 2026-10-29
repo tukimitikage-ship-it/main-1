@@ -5,23 +5,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ブロック崩し</title>
-  <script type="module" crossorigin src="/assets/index-DDGPmBTM.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Cu6nFAyt.css">
+  <script type="module" crossorigin src="/assets/index-D6MWcyDX.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-C61_E8Pp.css">
 </head>
 
 <body>
     <div class="home">
-        <h1 class="title">
+        <h1 class="title" data-i18n="gameTitle">
             ブロック崩し
         </h1>
-        <button class="start">
+        <div class="home-high-scores">
+            <p class="home-high-score">
+                <span data-i18n="normalHighScore">通常ハイスコア</span>:
+                <span class="normal-high-score">0</span>
+            </p>
+            <p class="home-high-score">
+                <span data-i18n="doubleHighScore">倍速ハイスコア</span>:
+                <span class="double-high-score">0</span>
+            </p>
+        </div>
+        <p class="home-status">
+            <span data-i18n="languageStatus">言語</span>:
+            <span class="home-language">日本語</span>
+            <span class="status-separator">|</span>
+            <span data-i18n="speedStatus">速度</span>:
+            <span class="home-speed">通常</span>
+        </p>
+        <button class="start" data-i18n="start">
             スタート
         </button>
-        <button class="config">
+        <button class="config" data-i18n="settings">
             設定
         </button>
     </div>
-    <canvas class="game hidden" width="480" height="320"></canvas>
+    <div class="game-area hidden">
+        <div class="game-hud">
+            <p class="game-score">
+                <span data-i18n="currentScore">スコア</span>
+                <span class="current-score">0</span>
+            </p>
+            <p class="game-status">
+                <span data-i18n="languageStatus">言語</span>:
+                <span class="game-language">日本語</span>
+                <span class="status-separator">|</span>
+                <span data-i18n="speedStatus">速度</span>:
+                <span class="game-speed">通常</span>
+            </p>
+        </div>
+        <canvas class="game" width="480" height="320"></canvas>
+        <p class="pause-hint" data-i18n="pauseHint">一時停止: 右クリック / W / ↑</p>
+    </div>
+    <section class="pause-menu hidden" aria-labelledby="pause-title">
+        <div class="pause-panel">
+            <h2 id="pause-title" data-i18n="pauseTitle">一時停止</h2>
+            <button class="resume" data-i18n="resume">つづける</button>
+            <button class="pause-home" data-i18n="home">ホームへ戻る</button>
+        </div>
+    </section>
+    <section class="result hidden" aria-labelledby="result-title">
+        <h2 id="result-title" data-i18n="resultTitle">ゲーム終了</h2>
+        <p class="result-label" data-i18n="resultScore">スコア</p>
+        <p class="result-score">0</p>
+        <button class="result-home" data-i18n="home">ホームへ戻る</button>
+    </section>
+    <section class="settings hidden" aria-labelledby="settings-title">
+        <div class="settings-panel">
+            <h2 id="settings-title" data-i18n="settingsTitle">設定</h2>
+            <label class="setting-row">
+                <span data-i18n="language">言語</span>
+                <select class="language-select" aria-label="Language">
+                    <option value="ja">日本語</option>
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                </select>
+            </label>
+            <label class="setting-row speed-setting">
+                <span data-i18n="speedMode">倍速モード</span>
+                <span class="speed-control">
+                    <input class="double-speed" type="checkbox">
+                </span>
+            </label>
+            <label class="setting-row speed-setting">
+                <span data-i18n="cheatMode">チートモード</span>
+                <span class="speed-control">
+                    <input class="cheat-mode" type="checkbox">
+                </span>
+            </label>
+            <p class="settings-note" data-i18n="nextGameNote">
+                変更は次のゲームから反映されます。
+            </p>
+            <div class="settings-buttons">
+                <button class="settings-save" data-i18n="save">保存</button>
+                <button class="settings-back" data-i18n="back">戻る</button>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>

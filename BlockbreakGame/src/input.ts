@@ -18,6 +18,7 @@ export function setupInput(
     ) {
       event.preventDefault();
       state.phase = "paused";
+      state.mouseControlEnabled = false;
       clearKeys(state);
     }
   });
@@ -27,17 +28,19 @@ export function setupInput(
   });
 
   window.addEventListener("mousemove", (event) => {
-    if (state.phase !== "playing") return;
+    if (state.phase !== "playing" || !state.mouseControlEnabled) return;
 
-    const bounds = canvas.getBoundingClientRect();
-    const mouseX =
-      (event.clientX - bounds.left) * (canvas.width / bounds.width);
-    state.paddle.x = mouseX - state.paddle.width / 2;
+    movePaddleToPointer(canvas, state, event.clientX);
   });
 
-  canvas.addEventListener("click", () => {
+  canvas.addEventListener("click", (event) => {
     if (state.phase === "ready") {
       state.phase = "playing";
+    }
+
+    if (state.phase === "playing" && !state.mouseControlEnabled) {
+      state.mouseControlEnabled = true;
+      movePaddleToPointer(canvas, state, event.clientX);
     }
   });
 
@@ -45,9 +48,23 @@ export function setupInput(
     event.preventDefault();
     if (state.phase === "playing") {
       state.phase = "paused";
+      state.mouseControlEnabled = false;
       clearKeys(state);
     }
   });
+}
+
+function movePaddleToPointer(
+  canvas: HTMLCanvasElement,
+  state: GameState,
+  clientX: number,
+): void {
+  const bounds = canvas.getBoundingClientRect();
+  const mouseX = (clientX - bounds.left) * (canvas.width / bounds.width);
+  state.paddle.x = Math.max(
+    -state.paddle.width / 2,
+    Math.min(mouseX - state.paddle.width / 2, canvas.width - state.paddle.width / 2),
+  );
 }
 
 function clearKeys(state: GameState): void {

@@ -41,7 +41,46 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-.home button {
+.home-high-scores {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: -8px 0 8px;
+}
+
+.home-high-score {
+    margin: 0;
+    color: #e2e8f0;
+    font-size: 18px;
+}
+
+.home-high-score span {
+    color: #7dd3fc;
+    font-weight: 700;
+}
+
+.home-status {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: -4px 0 8px;
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.home-language,
+.home-speed,
+.game-language,
+.game-speed {
+    color: #7dd3fc;
+    font-weight: 700;
+}
+
+.home button,
+.result button,
+.pause-panel button,
+.settings-panel button {
     width: 200px;
     padding: 12px 0;
     font-size: 18px;
@@ -53,14 +92,216 @@ body {
     transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
 
-.home button:hover {
+.home button:hover,
+.result button:hover,
+.pause-panel button:hover,
+.settings-panel button:hover {
     background: linear-gradient(110deg, rgba(56, 189, 248, 0.28), rgba(59, 130, 246, 0.34));
     border-color: #bae6fd;
     transform: translateY(-1px);
 }
 
-canvas {
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: min(90vw, 360px);
+    padding: 32px 48px;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #1e293b, #111c33 75%);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+}
+
+.result h2,
+.result p {
+    margin: 0;
+}
+
+.result h2 {
+    color: #bae6fd;
+    font-size: 32px;
+}
+
+.result-label {
+    color: #cbd5e1;
+    font-size: 18px;
+}
+
+.result-score {
+    color: #7dd3fc;
+    font-size: clamp(72px, 18vw, 120px);
+    font-weight: 700;
+    line-height: 1;
+    text-shadow: 0 0 24px rgba(56, 189, 248, 0.35);
+}
+
+.pause-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(2, 6, 23, 0.72);
+}
+
+.pause-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 48px;
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #1e293b, #111c33 75%);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.pause-panel h2 {
+    margin: 0 0 8px;
+    color: #bae6fd;
+    font-size: 32px;
+}
+
+.settings {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(2, 6, 23, 0.78);
+}
+
+.settings-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: min(90vw, 440px);
+    padding: 32px;
+    border: 1px solid rgba(56, 189, 248, 0.5);
+    border-radius: 20px;
+    background: linear-gradient(145deg, #1e293b, #111c33 75%);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.settings-panel h2 {
+    margin: 0;
+    color: #bae6fd;
+    font-size: 32px;
+    text-align: center;
+}
+
+.setting-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #e2e8f0;
+    font-weight: 600;
+}
+
+.setting-row select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(125, 211, 252, 0.7);
+    border-radius: 8px;
+    background: #0f172a;
+    color: #e2e8f0;
+    font: inherit;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+}
+
+.speed-setting {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.speed-control input {
+    width: 18px;
+    height: 18px;
+    accent-color: #38bdf8;
+}
+
+.settings-note {
+    margin: -8px 0 0;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.settings-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.settings-buttons button {
+    width: auto;
+    min-width: 120px;
+    padding: 10px 16px;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
     width: min(90vw, calc(90vh*1.5), 960px);
+}
+
+.game-hud {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    color: #e2e8f0;
+}
+
+.game-score {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.current-score {
+    color: #7dd3fc;
+    font-size: 28px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 800;
+    text-shadow: 0 0 14px rgba(56, 189, 248, 0.35);
+}
+
+.game-status {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 13px;
+    text-align: right;
+}
+
+.pause-hint {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 13px;
+    visibility: hidden;
+}
+
+.pause-hint.visible {
+    visibility: visible;
+}
+
+canvas {
+    width: 100%;
     aspect-ratio: 3 / 2;
     border: 2px solid transparent;
     border-bottom-color: red;
@@ -70,6 +311,62 @@ canvas {
     box-shadow: 0 0 5px rgba(56, 189, 248, 0.2), 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
+@media (max-width: 480px) {
+    .settings-panel {
+        padding: 24px;
+    }
+
+    .settings-buttons button {
+        min-width: 0;
+        flex: 1;
+    }
+}
+
 .hidden {
     display: none;
+}
+
+.home:not(.hidden),
+.game-area:not(.hidden),
+.result:not(.hidden),
+.settings:not(.hidden),
+.pause-menu:not(.hidden) {
+    animation: screen-enter 220ms ease-out both;
+}
+
+.pause-panel,
+.settings-panel {
+    animation: panel-enter 220ms ease-out both;
+}
+
+@keyframes screen-enter {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes panel-enter {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
 }

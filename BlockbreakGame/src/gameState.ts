@@ -1,18 +1,20 @@
 import {
   BALL_SPEED,
   BALL_START_ANGLE,
+  BOARD_PATTERNS,
+  BLOCK_COLUMNS,
   BLOCK_GAP,
   BLOCK_HEIGHT,
   BLOCK_LEFT,
+  BLOCK_ROWS,
   BLOCK_TOP,
   BLOCK_WIDTH,
-  LEVEL,
   PADDLE_BOTTOM_OFFSET,
   PADDLE_HEIGHT,
   PADDLE_SPEED,
   PADDLE_WIDTH,
 } from "./config";
-export type GamePhase = "home" | "ready" | "playing" | "paused";
+export type GamePhase = "home" | "ready" | "playing" | "paused" | "result";
 
 type Rectangle = {
   x: number;
@@ -22,8 +24,20 @@ type Rectangle = {
 };
 
 export type Block = Rectangle & {
-  type: "normal" | "hard";
+  type: "normal" | "hard" | "unbreakable";
   hp: number;
+  crackPattern: number;
+};
+
+export type Particle = {
+  x: number;
+  y: number;
+  speedX: number;
+  speedY: number;
+  size: number;
+  color: string;
+  life: number;
+  maxLife: number;
 };
 
 export type GameState = {
@@ -33,15 +47,22 @@ export type GameState = {
     speedX: number;
     speedY: number;
   };
+  boardRevealProgress: number;
   paddle: Rectangle & { speed: number };
   blocks: Block[];
+  particles: Particle[];
   keys: Record<string, boolean>;
   phase: GamePhase;
+  score: number;
+  cheatMode: boolean;
+  mouseControlEnabled: boolean;
+  speedMultiplier: number;
 };
 
 export function createGameState(canvas: HTMLCanvasElement): GameState {
   const state: GameState = {
     ball: { x: 0, y: 0, speedX: 0, speedY: 0 },
+    boardRevealProgress: 1,
     paddle: {
       x: 0,
       y: 0,
@@ -50,8 +71,13 @@ export function createGameState(canvas: HTMLCanvasElement): GameState {
       speed: PADDLE_SPEED,
     },
     blocks: [],
+    particles: [],
     keys: {},
     phase: "home",
+    score: 0,
+    cheatMode: false,
+    mouseControlEnabled: false,
+    speedMultiplier: 1,
   };
 
   resetGameState(state, canvas);
@@ -61,11 +87,20 @@ export function createGameState(canvas: HTMLCanvasElement): GameState {
 export function resetGameState(
   state: GameState,
   canvas: HTMLCanvasElement,
+  speedMultiplier = 1,
+  cheatMode = false,
 ): void {
+  state.score = 0;
+  state.cheatMode = cheatMode;
+  state.boardRevealProgress = 1;
+  state.mouseControlEnabled = false;
+  state.speedMultiplier = speedMultiplier;
   state.ball.x = canvas.width / 2;
   state.ball.y = canvas.height - 70;
-  state.ball.speedX = BALL_SPEED * Math.sin(BALL_START_ANGLE);
-  state.ball.speedY = -BALL_SPEED * Math.cos(BALL_START_ANGLE);
+  state.ball.speedX =
+    BALL_SPEED * speedMultiplier * Math.sin(BALL_START_ANGLE);
+  state.ball.speedY =
+    -BALL_SPEED * speedMultiplier * Math.cos(BALL_START_ANGLE);
 
   state.paddle.x = (canvas.width - state.paddle.width) / 2;
   state.paddle.y =
@@ -77,23 +112,29 @@ export function resetGameState(
 
   state.blocks.length = 0;
   state.blocks.push(...createBlocks());
+  state.particles.length = 0;
 }
 
 export function createBlocks(): Block[] {
   const blocks: Block[] = [];
+  const pattern =
+    BOARD_PATTERNS[Math.floor(Math.random() * BOARD_PATTERNS.length)]!;
 
-  for (const [row, cells] of LEVEL.entries()) {
-    for (const [column, cell] of cells.entries()) {
-      if (cell !== 1) continue;
+  for (let row = 0; row < BLOCK_ROWS; row++) {
+    for (let column = 0; column < BLOCK_COLUMNS; column++) {
+      const tile = pattern[row]?.[column];
+      if (!tile || tile === "0") continue;
 
-      const isHard = row === 0;
+      const type =
+        tile === "2" ? "hard" : tile === "3" ? "unbreakable" : "normal";
       blocks.push({
         x: BLOCK_LEFT + column * (BLOCK_WIDTH + BLOCK_GAP),
         y: BLOCK_TOP + row * (BLOCK_HEIGHT + BLOCK_GAP),
         width: BLOCK_WIDTH,
         height: BLOCK_HEIGHT,
-        type: isHard ? "hard" : "normal",
-        hp: isHard ? 2 : 1,
+        type,
+        hp: type === "hard" ? 2 : type === "normal" ? 1 : Infinity,
+        crackPattern: Math.floor(Math.random() * 4),
       });
     }
   }
