@@ -12,6 +12,7 @@ import {
   PADDLE_SPEED,
   PADDLE_WIDTH,
 } from "./config";
+export type GamePhase = "home" | "ready" | "playing" | "paused";
 
 type Rectangle = {
   x: number;
@@ -35,7 +36,7 @@ export type GameState = {
   paddle: Rectangle & { speed: number };
   blocks: Block[];
   keys: Record<string, boolean>;
-  isRunning: boolean;
+  phase: GamePhase;
 };
 
 export function createGameState(canvas: HTMLCanvasElement): GameState {
@@ -50,7 +51,7 @@ export function createGameState(canvas: HTMLCanvasElement): GameState {
     },
     blocks: [],
     keys: {},
-    isRunning: false,
+    phase: "home",
   };
 
   resetGameState(state, canvas);

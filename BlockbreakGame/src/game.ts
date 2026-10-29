@@ -18,13 +18,29 @@ export function startGame(
   home: HTMLElement,
   state: GameState,
 ): void {
-  if (state.isRunning) return;
+  if (state.phase !== "home") return;
 
   resetGameState(state, canvas);
   canvas.classList.remove("hidden");
   home.classList.add("hidden");
-  state.isRunning = true;
+  state.phase = "ready";
   requestAnimationFrame(() => runFrame(canvas, context, home, state));
+}
+
+export function resumeGame(state: GameState): void {
+  if (state.phase === "paused") {
+    state.phase = "playing";
+  }
+}
+
+export function returnToHome(
+  canvas: HTMLCanvasElement,
+  home: HTMLElement,
+  state: GameState,
+): void {
+  state.phase = "home";
+  canvas.classList.add("hidden");
+  home.classList.remove("hidden");
 }
 
 function runFrame(
@@ -33,12 +49,12 @@ function runFrame(
   home: HTMLElement,
   state: GameState,
 ): void {
-  if (!state.isRunning) return;
+  if (state.phase === "home") return;
 
-  updateGame(canvas, state);
-  if (!state.isRunning) {
-    canvas.classList.add("hidden");
-    home.classList.remove("hidden");
+  const gameOver =
+    state.phase === "playing" && updateGame(canvas, state);
+  if (gameOver) {
+    returnToHome(canvas, home, state);
     return;
   }
 
@@ -46,12 +62,12 @@ function runFrame(
   requestAnimationFrame(() => runFrame(canvas, context, home, state));
 }
 
-function updateGame(canvas: HTMLCanvasElement, state: GameState): void {
+function updateGame(canvas: HTMLCanvasElement, state: GameState): boolean {
   const previousPosition = { x: state.ball.x, y: state.ball.y };
   state.ball.x += state.ball.speedX;
   state.ball.y += state.ball.speedY;
 
-  if (!bounceOffWalls(canvas, state)) return;
+  if (!bounceOffWalls(canvas, state)) return true;
   movePaddle(canvas, state);
   bounceOffPaddle(state);
   hitBlock(state, previousPosition);
@@ -59,6 +75,8 @@ function updateGame(canvas: HTMLCanvasElement, state: GameState): void {
   if (state.blocks.length === 0) {
     state.blocks.push(...createBlocks());
   }
+
+  return false;
 }
 
 function bounceOffWalls(canvas: HTMLCanvasElement, state: GameState): boolean {
@@ -73,7 +91,7 @@ function bounceOffWalls(canvas: HTMLCanvasElement, state: GameState): boolean {
     ball.x = BALL_RADIUS;
   }
   if (ball.y > canvas.height - BALL_RADIUS) {
-    state.isRunning = false;
+    state.phase = "home";
     return false;
   }
   if (ball.y < BALL_RADIUS) {
